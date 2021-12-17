@@ -1,10 +1,12 @@
 var readlineSync = require("readline-sync");
 
+function welcome() {
 var userName = readlineSync.question("What is your name? ");
-var score=0
+
 console.log("Welcome " + userName +"!!")
 console.log("How well do you know Aafaque?")
-
+}
+var score=0
 function play(question,answer){
 var userAnswer = readlineSync.question(question)
 
@@ -13,9 +15,24 @@ if (userAnswer.toLowerCase() == answer){
   score=score+1}
 else {console.log("Sorry, wrong answer!")  
 }
-console.log("your Score is: "+ score)
+console.log("your current Score is: "+ score)
+console.log("____________________")
 }
 
+function game(){for (var i=0; i<questionBank.length; i++){
+play(questionBank[i].question,questionBank[i].answer)
+}}
+
+var highscore=[
+  {
+    name: "Aafaque", score:5
+    
+  },
+  {
+    name:"Aamir", score:4
+  
+  }
+]
 var question1 = {
   question: "Where do i live?",
   answer:"delhi"
@@ -37,6 +54,14 @@ var question5 = {
   answer:"pizza"
 }
 questionBank=[question1,question2,question3,question4,question5]
-for (var i=0; i<5; i++){
-play(questionBank[i].question,questionBank[i].answer)
-}
+
+
+welcome()
+game()
+
+console.log("Congratulations!, you scored "+ score)
+
+console.log("************************************************************")
+console.log("HighScores")
+for(i=0; i<highscore.length; i++){
+console.log((i+1)+"."+ "Name: "+ highscore[i].name + "--> score: "+highscore[i].score)}
